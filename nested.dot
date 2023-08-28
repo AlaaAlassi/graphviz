@@ -1,0 +1,50 @@
+digraph G {
+
+    graph [fontsize=12 fontname="Verdana" compound=true penwidth = 2];
+    node [shape=record fontsize=10 fontname="Verdana"];
+
+    subgraph cluster_0 {
+        node [style=filled];
+        "Game package" "Map package";
+        label = "Web Server";
+        color=darkgreen;
+    }
+
+    subgraph cluster_1 {
+        node [style=filled];
+        "scenic BP" "UWB sensor BP" "Vehil map";
+        label = "Unreal Editor Container";
+        color=darkorange;
+    }
+
+    subgraph cluster_2 {
+        node [style=filled];
+        "CI-CD script" "Carla-release Docker Image";
+        label = "carla-server repository";
+        color=darkgreen;
+    }
+
+    subgraph cluster_3 {
+        node [style=filled];
+        "Orchestrator";
+        label = "Application";
+        color=darkgreen;
+    }
+
+    //Edges between nodes render fine
+    "Vehil map" -> "Map package";
+    "UWB sensor BP" -> "Game package"
+    "scenic BP" -> "Game package"
+    "Vehil map" -> "Game package" [style=dashed]
+
+    // Edges that directly connect one cluster to another
+    //uncomment this to connect to the cluster box
+    //[ltail=cluster_1 lhead=cluster_0];
+    "Game package" -> "CI-CD script"
+    "Map package" -> "CI-CD script"
+    "CI-CD script" -> "Carla-release Docker Image"
+    //uncomment this to connect to the cluster box
+    //[ltail=cluster_0 lhead=cluster_2];
+
+    "Carla-release Docker Image" -> "Orchestrator"
+}

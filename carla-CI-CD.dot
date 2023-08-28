@@ -1,0 +1,26 @@
+digraph diagram {
+  node [shape=box];
+  rankdir=TB;
+
+  subgraph cluster_outer2 {
+    label = "Container registry";
+    
+    subgraph cluster_inner2 {
+      label = "Carla Game Docker Image";
+      style = dashed;
+
+      inner_box2 [label="Carla Assets"];
+    }
+  }
+    subgraph cluster_outer1 {
+    label = "Application Docker-compose file";
+    
+    subgraph cluster_inner1 {
+      label = "Carla Game Docker Image";
+      style = dashed;
+
+      inner_box1 [label="Carla Assets (Sensors, Vehicles, Maps)"];
+    }
+  }
+  inner_box2 -> inner_box1 [ltail=cluster_inner1,head=cluster_inner2]
+}

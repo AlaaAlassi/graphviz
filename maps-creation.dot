@@ -1,0 +1,21 @@
+digraph diagram {
+  node [shape=box];
+  rankdir=TB;
+
+  subgraph cluster_0 {
+    label="";
+
+    box1 [label="OpenStreet Maps"];
+    box2 [label="Aerial Images\n[ArcGIS/QGIS/Mapbox]"];
+    box3 [label="Elevation Data"];
+    box4 [label="Road Runner"];
+    box5 [label="CarlaUE4Editor"];
+    box6 [label="Carla Docker Image"];
+
+    box1 -> box4 [label=".osm"];
+    box2 -> box4 [label=".png"];
+    box3 -> box4 [label=".tif/.asc/.xyz"];
+    box4 -> box5 [label=".zip"];
+    box5 -> box6 [label=".tar.gz"]
+  }
+}
