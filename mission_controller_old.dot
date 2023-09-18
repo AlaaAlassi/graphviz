@@ -1,0 +1,44 @@
+digraph StateHandlers {
+    // Define the nodes (leafs and control nodes)
+    rankdir=LR
+    // Circular leaf nodes
+    node [shape=ellipse, style=filled, fillcolor=lightgray]; // Set the default shape to circle and specify style and fill color for leaf nodes
+
+    // Leaf nodes
+    PP_Server [label="Path Planner\nService Server"];
+    LP_Server [label="Local Planner\nService Server"];
+    Controller [label="Controller\nService Server"]; // You can specify the actual action here
+
+        // Leaf nodes
+    PP_Client [label="Path Planner\nService Client"];
+    LP_Client [label="Local Planner\nService Client"];
+    Controller_Client [label="Controller\nService Client"]; // You can specify the actual action here
+
+    
+    subgraph cluster_1 {
+        node [style=filled];
+        PP_Client LP_Client Controller_Client;
+        label = "Mission Controller";
+        color=blue;
+        PP_Client -> LP_Client -> Controller_Client [rank=same, dir=none, style=invis];
+    }
+    
+    
+    
+    subgraph cluster_2 {
+        node [style=filled];
+        PP_Server LP_Server Controller;
+        label = "Mission Services";
+        color=darkorange;
+            // Define the edges between nodes
+        PP_Server -> LP_Server [label="/nodeID"];
+        LP_Server -> Controller [label="/xyh"];
+    }
+
+
+
+    PP_Client -> PP_Server ;PP_Server -> PP_Client; 
+    LP_Client -> LP_Server; LP_Server -> LP_Client;
+    Controller_Client -> Controller; Controller-> Controller_Client;
+
+}

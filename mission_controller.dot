@@ -7,7 +7,7 @@ digraph BehavioralTree {
     // Leaf nodes
     PP_Client [label="Path Planner\nAction Client"];
     LP_client [label="Local Planner\nAction Client"];
-    Cntr_client [label="Controller\nAction Client"]; // You can specify the actual action here
+    Contr_client [label="Controller\nAction Client"]; // You can specify the actual action here
 
     // Control nodes
     behavior [label="behavior", shape=box];
@@ -16,15 +16,15 @@ digraph BehavioralTree {
     // Define the edges between nodes
     behavior -> PP_Client;
     behavior -> LP_client;
-    behavior -> Cntr_client;
+    behavior -> Contr_client;
 
     // server nodes
     PP_server [label="Path Planner\nAction Server"];
     LP_server [label="Local Planner\nAction Server"];
-    Cntr_server [label="Controller\nAction Server"]; // You can specify the actual action here
+    Contr_server [label="Controller\nAction Server"]; // You can specify the actual action here
 
     // Define the edges between nodes
     PP_Client -> PP_server;PP_server ->PP_Client;
     LP_client -> LP_server;LP_server ->LP_client;
-    Cntr_client -> Cntr_server;Cntr_server ->Cntr_client;
+    Contr_client -> Contr_server;Contr_server ->Contr_client;
 }
