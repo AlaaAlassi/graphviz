@@ -5,18 +5,18 @@ digraph BehavioralTree {
     node [shape=ellipse, style=filled, fillcolor=lightgray]; // Set the default shape to circle and specify style and fill color for leaf nodes
 
     // Leaf nodes
-    leaf1 [label="Path Planner\nAction Client"];
-    leaf2 [label="Local Planner\nAction Client"];
-    leaf3 [label="Controller\nAction Client"]; // You can specify the actual action here
+    PP_Client [label="Path Planner\nAction Client"];
+    LP_client [label="Local Planner\nAction Client"];
+    Cntr_client [label="Controller\nAction Client"]; // You can specify the actual action here
 
     // Control nodes
     behavior [label="behavior", shape=box];
     // Add any other control nodes if necessary
 
     // Define the edges between nodes
-    behavior -> leaf1;
-    behavior -> leaf2;
-    behavior -> leaf3;
+    behavior -> PP_Client;
+    behavior -> LP_client;
+    behavior -> Cntr_client;
 
     // server nodes
     PP_server [label="Path Planner\nAction Server"];
@@ -24,7 +24,7 @@ digraph BehavioralTree {
     Cntr_server [label="Controller\nAction Server"]; // You can specify the actual action here
 
     // Define the edges between nodes
-    leaf1 -> PP_server;PP_server ->leaf1;
-    leaf2 -> LP_server;LP_server ->leaf2;
-    leaf3 -> Cntr_server;Cntr_server ->leaf3;
+    PP_Client -> PP_server;PP_server ->PP_Client;
+    LP_client -> LP_server;LP_server ->LP_client;
+    Cntr_client -> Cntr_server;Cntr_server ->Cntr_client;
 }
