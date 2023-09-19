@@ -2,7 +2,7 @@ digraph BehavioralTree {
     // Define the nodes (leafs and control nodes)
 
     // Circular leaf nodes
-    node [shape=ellipse, style=filled, fillcolor=lightgray];
+    node [shape=box, style=filled, fillcolor=lightgray];
 
     // Define the "sequenceShape" with a larger arrow label
     sequenceShape [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">

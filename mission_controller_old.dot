@@ -2,7 +2,7 @@ digraph StateHandlers {
     // Define the nodes (leafs and control nodes)
     rankdir=LR
     // Circular leaf nodes
-    node [shape=ellipse, style=filled, fillcolor=lightgray]; // Set the default shape to circle and specify style and fill color for leaf nodes
+    node [shape=box, style=filled, fillcolor=lightgray]; // Set the default shape to circle and specify style and fill color for leaf nodes
 
     // Leaf nodes
     PP_Server [label="Path Planner\nService Server"];
