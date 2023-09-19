@@ -24,10 +24,12 @@ digraph BehavioralTree {
     Root [label="Root", shape=box];
     Task1 [label="Task1", shape=box];
     Task2 [label="Task2", shape=box];
+    Task2_SubTree [label="Task2 \n<SubTree>", shape=box];
 
     Root->sequenceShape
     sequenceShape->Task1;
     sequenceShape->Task2;
+    Task2 -> Task2_SubTree;
     // Add any other control nodes if necessary
 
 
