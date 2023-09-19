@@ -2,7 +2,18 @@ digraph BehavioralTree {
     // Define the nodes (leafs and control nodes)
 
     // Circular leaf nodes
-    node [shape=ellipse, style=filled, fillcolor=lightgray]; // Set the default shape to circle and specify style and fill color for leaf nodes
+    node [shape=ellipse, style=filled, fillcolor=lightgray];
+
+    // Define the "sequenceShape" with a larger arrow label
+    sequenceShape [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD PORT="arrow">→</TD></TR>
+    </TABLE>>, shape=box];
+
+    // Define the "parallelShape" with two parallel arrows
+    parallelShape [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD PORT="arrow1">→</TD></TR>
+      <TR><TD PORT="arrow2">→</TD></TR>
+    </TABLE>>, shape=box];
 
     // Leaf nodes
     PP_Client [label="Path Planner\nAction Client"];
@@ -10,13 +21,20 @@ digraph BehavioralTree {
     Contr_client [label="Controller\nAction Client"]; // You can specify the actual action here
 
     // Control nodes
-    behavior [label="behavior", shape=box];
+    Root [label="Root", shape=box];
+    Task1 [label="Task1", shape=box];
+    Task2 [label="Task2", shape=box];
+
+    Root->sequenceShape
+    sequenceShape->Task1;
+    sequenceShape->Task2;
     // Add any other control nodes if necessary
 
+
     // Define the edges between nodes
-    behavior -> PP_Client;
-    behavior -> LP_client;
-    behavior -> Contr_client;
+    Task1 -> parallelShape -> PP_Client;
+    parallelShape-> LP_client;
+    parallelShape->Contr_client;
 
     // server nodes
     PP_server [label="Path Planner\nAction Server"];
