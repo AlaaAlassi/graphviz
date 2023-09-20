@@ -1,0 +1,73 @@
+digraph BehavioralTree {
+    // Define the nodes (leafs and control nodes)
+    
+    // Circular leaf nodes
+    node [shape=box, style=filled, fillcolor=lightgray];
+
+    // Define the "sequenceShape" with a larger arrow label
+    sequenceShape [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD PORT="arrow">→</TD></TR>
+    </TABLE>>, shape=box];
+
+    // Define the "parallelShape" with two parallel arrows
+    parallelShape [label=<<TABLE BORDER="0" CELLBORDER="0" CELLSPACING="0">
+      <TR><TD PORT="arrow1">→</TD></TR>
+      <TR><TD PORT="arrow2">→</TD></TR>
+    </TABLE>>, shape=box];
+
+
+
+
+    subgraph cluster_0 {
+        node [style=filled];
+        label = "";
+        color=black;
+
+            // Control nodes
+        Root [label="Root", shape=box];
+        Task1 [label="Task1", shape=box];
+        Task2 [label="Task2", shape=box];
+        Task2_SubTree [label="Task2 \n<SubTree>", shape=box];
+
+        // Leaf nodes
+    PP_Client [label="Path Planner\nService Client"];
+    LP_client [label="Local Planner\nService Client"];
+    Contr_client [label="Controller\nService Client"]; // You can specify the actual action here
+
+        Root->sequenceShape
+        sequenceShape->Task1;
+        sequenceShape->Task2;
+        Task2 -> Task2_SubTree;
+        // Add any other control nodes if necessary
+                // Define the edges between nodes
+        Task1 -> parallelShape -> PP_Client;
+        parallelShape-> LP_client;
+        parallelShape->Contr_client;
+
+            // Define the edges between nodes
+        PP_Client -> PP_server;PP_server ->PP_Client;
+        LP_client -> LP_server;LP_server ->LP_client;
+        Contr_client -> Contr_server;Contr_server ->Contr_client;
+
+    }
+
+
+
+    subgraph cluster_1 {
+        node [style=filled];
+        label = "";
+        color=blue;
+            // server nodes
+    PP_server [label="Path Planner\nService Server"];
+    LP_server [label="Local Planner\nService Server"];
+    Contr_server [label="Controller\nService Server"]; // You can specify the actual Service here
+
+    PP_server -> LP_server -> Contr_server  [constraint=false];
+    }
+
+
+    rankdir=TB; // Top to bottom
+
+
+
+}
