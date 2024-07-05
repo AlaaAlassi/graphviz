@@ -1,0 +1,55 @@
+digraph G {
+    rankdir=LR;
+    node [shape=box];
+
+    subgraph cluster_scenarios {
+        label = "Scenarios";
+        Scenario1 [label="Scenario 1, Yard"];
+        Scenario2 [label="Scenario 2, ISA"];
+        PlaceholderScenario [label="......"];
+    }
+
+    subgraph cluster_tasks {
+        label = "Tasks";
+        ReverseParking [label="Reverse Parking"];
+        ObstacleAvoidance [label="Obstacle Avoidance"];
+        AdaptiveCruiseControl [label="Adaptive Cruise Control"];
+        CruiseControl [label="Cruise Control"];
+        PlaceholderTask [label="......"];
+    }
+
+    subgraph cluster_function_atoms {
+        label = "Function Atoms";
+        PlaceholderFunctionAtom1 [label="......"];
+        PlaceholderFunctionAtom2 [label="......"];
+        PlaceholderFunctionAtom3 [label="......"];
+        PlaceholderFunctionAtom4 [label="......"];
+    }
+
+    subgraph cluster_functionalities {
+        label = "Functionalities";
+        PlaceholderFunctionality1 [label="......"];
+        PlaceholderFunctionality2 [label="......"];
+        PlaceholderFunctionality3 [label="......"];
+    }
+
+    // Edges between Scenarios and Tasks
+    Scenario1 -> ReverseParking;
+    Scenario1 -> ObstacleAvoidance;
+    Scenario1 -> CruiseControl;
+    Scenario2 -> CruiseControl;
+    PlaceholderScenario -> PlaceholderTask;
+
+    // Edges between Tasks and Function Atoms
+    ReverseParking -> PlaceholderFunctionAtom1;
+    ObstacleAvoidance -> PlaceholderFunctionAtom2;
+    AdaptiveCruiseControl -> PlaceholderFunctionAtom3;
+    PlaceholderTask -> PlaceholderFunctionAtom4;
+
+    // Edges between Function Atoms and Functionalities
+    PlaceholderFunctionAtom1 -> PlaceholderFunctionality1;
+    PlaceholderFunctionAtom2 -> PlaceholderFunctionality2;
+    PlaceholderFunctionAtom3 -> PlaceholderFunctionality3;
+    PlaceholderFunctionAtom4 -> PlaceholderFunctionality1;
+}
+
