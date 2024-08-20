@@ -1,18 +1,21 @@
 digraph G {
-    // Simulation Container
+    // Simulation Serivce
     subgraph cluster_simulation {
-        label = "Simulation Container";
+        label = "Simulation Serivce";
         style = filled;
         color = lightgrey;
         
         Environment [shape=ellipse, label="External Environment Conditions"];
         SensorModels [shape=ellipse, label="Sensor Models"];
+
+        Environment -> SensorModels;
+
         
     }
     
-    // System Container
+    // System Serivce
     subgraph cluster_system {
-        label = "System Container";
+        label = "System Serivce";
         style = filled;
         color = lightblue;
         
@@ -22,5 +25,7 @@ digraph G {
         SUT -> Logging;
     }
     
-    // Connecting the containers
+    // Connecting the Serivces
+    SensorModels -> SUT
+    Environment -> Logging
 }
