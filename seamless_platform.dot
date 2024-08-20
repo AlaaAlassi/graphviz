@@ -1,31 +1,36 @@
 digraph G {
-    // Simulation Serivce
+    // Communication Broker Container
+    subgraph cluster_communication_broker {
+        label = "Communication Broker";
+        style = filled;
+        color = lightyellow;
+        routing [shape=ellipse, label="routing"];
+        Logging [shape=ellipse, label="Logging"];
+    }
+    
+    // Simulation Service Container
     subgraph cluster_simulation {
-        label = "Simulation Serivce";
+        label = "Simulation Service";
         style = filled;
         color = lightgrey;
         
         Environment [shape=ellipse, label="External Environment Conditions"];
         SensorModels [shape=ellipse, label="Sensor Models"];
-
-        Environment -> SensorModels;
-
-        
     }
     
-    // System Serivce
+    // System Service Container
     subgraph cluster_system {
-        label = "System Serivce";
+        label = "System Service";
         style = filled;
         color = lightblue;
         
         SUT [shape=box, label="System Under Test (SUT)"];
-        Logging [shape=ellipse, label="Logging"];
-        
-        SUT -> Logging;
     }
     
-    // Connecting the Serivces
-    SensorModels -> SUT
-    Environment -> Logging
+    // Connecting nodes to Communication Broker
+    Environment -> routing;
+    SensorModels -> routing;
+    SUT -> routing;
+    routing -> Logging;
+    
 }
