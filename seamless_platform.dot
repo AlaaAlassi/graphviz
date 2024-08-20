@@ -1,0 +1,26 @@
+digraph G {
+    // Simulation Container
+    subgraph cluster_simulation {
+        label = "Simulation Container";
+        style = filled;
+        color = lightgrey;
+        
+        Environment [shape=ellipse, label="External Environment Conditions"];
+        SensorModels [shape=ellipse, label="Sensor Models"];
+        
+    }
+    
+    // System Container
+    subgraph cluster_system {
+        label = "System Container";
+        style = filled;
+        color = lightblue;
+        
+        SUT [shape=box, label="System Under Test (SUT)"];
+        Logging [shape=ellipse, label="Logging"];
+        
+        SUT -> Logging;
+    }
+    
+    // Connecting the containers
+}
