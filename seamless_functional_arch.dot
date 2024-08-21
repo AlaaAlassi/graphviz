@@ -21,25 +21,28 @@ digraph G {
         color = khaki1;
         
         Environment [shape=box, label="External Environment Conditions"];
-        SensorModel [shape=box, label="Sensor Model"];
-
+        SensorModel [shape=box, label="Sensor Model (RGB camera)"];
+        IQA [shape=box, label="Image Quality Assessment"]
         Environment -> SensorModel;
+        SensorModel -> IQA; 
     }
     
     // System Service Container
     subgraph cluster_system {
         label = "System Service";
         style = filled;
-        color = lightblue;
+        color = mistyrose2;
         
-        SUT [shape=box, label="System Under Test (SUT)"];
+        SUT [shape=box, label="System Under Test (Yolo Object Detector)"];
     }
     
-    // Connecting nodes to Communication Broker
+    // Connecting nodes
+    statisticsLogging [shape=box, color=grey83, style=filled, fillcolor=grey83, label="Statistics Logging"]
     scenario -> Environment;
     scenario -> SensorModel;
     SensorModel -> SUT;
-    SUT -> Logging;
-    SensorModel -> Logging;
+    SUT -> statisticsLogging;
+    Environment -> statisticsLogging;
+    IQA -> statisticsLogging;
     
 }
