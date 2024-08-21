@@ -1,0 +1,45 @@
+digraph G {
+
+    // System Service Scenario
+    subgraph cluster_Scenario {
+        label = "Scenario generator";
+        style = filled;
+        color = lightblue;
+        
+        config [shape=box, label="config file"];
+        converter [shape=box, label="config to code converter"];
+        scenario [shape=box, label="scenario code"];
+
+        config -> converter;
+        converter -> scenario;
+    }
+    
+    // Simulation Service Container
+    subgraph cluster_simulation {
+        label = "Simulation Service";
+        style = filled;
+        color = khaki1;
+        
+        Environment [shape=box, label="External Environment Conditions"];
+        SensorModel [shape=box, label="Sensor Model"];
+
+        Environment -> SensorModel;
+    }
+    
+    // System Service Container
+    subgraph cluster_system {
+        label = "System Service";
+        style = filled;
+        color = lightblue;
+        
+        SUT [shape=box, label="System Under Test (SUT)"];
+    }
+    
+    // Connecting nodes to Communication Broker
+    scenario -> Environment;
+    scenario -> SensorModel;
+    SensorModel -> SUT;
+    SUT -> Logging;
+    SensorModel -> Logging;
+    
+}
